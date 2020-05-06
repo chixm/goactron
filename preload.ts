@@ -1,8 +1,17 @@
+import { loadToDom } from "./renderer/basicButton";
+import { ipcRenderer } from "electron";
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
-  const replaceText = (selector: any, text: string) => {
-    const element = document.getElementById(selector)
-    if (element) element.innerText = text
+  loadToDom();
+});
+
+declare global {
+  interface Window { 
+    mainProcessFunc : (command: string) => Promise<string>,
   }
-})
+}
+
+window.mainProcessFunc = async function(command :string) {
+  return ipcRenderer.invoke('command-exec', command);
+};

@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var electron_1 = require("electron");
 // Modules to control application life and create native browser window
 var _a = require('electron'), app = _a.app, BrowserWindow = _a.BrowserWindow;
 var path = require('path');
@@ -14,7 +16,13 @@ function createWindow() {
     // and load the index.html of the app.
     mainWindow.loadFile('index.html');
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools();
+    electron_1.ipcMain.handle('command-exec', function (_event, command) {
+        console.log(command + " received!");
+        return new Promise(function (resolve) {
+            resolve("Renderer Process Execute " + command);
+        });
+    });
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
