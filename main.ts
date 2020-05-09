@@ -1,3 +1,5 @@
+import { ipcMain } from "electron"
+
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
@@ -16,7 +18,14 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+
+  ipcMain.handle('command-exec', (_event, command) => {
+    console.log(`${command} received!`);
+    return new Promise<string>(resolve=>{
+      resolve(`Renderer Process Execute ${command}`);
+    });
+  });
 }
 
 // This method will be called when Electron has finished
