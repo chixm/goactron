@@ -18,3 +18,6 @@ npm install
 # Run the app
 npm start
 ```
+
+# Build Go binary
+go build -buildmode=c-shared -o dist/goactron.dll ./...
