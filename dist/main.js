@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
+var dllLoader_1 = require("./dllLoader");
 // Modules to control application life and create native browser window
 var _a = require('electron'), app = _a.app, BrowserWindow = _a.BrowserWindow;
 var path = require('path');
@@ -19,15 +20,18 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
     electron_1.ipcMain.handle('command-exec', function (_event, command) {
         console.log(command + " received!");
+        var dllReturnString = dllLoader_1.dllMakeDirectory(command);
         return new Promise(function (resolve) {
-            resolve("Renderer Process Execute " + command);
+            resolve("DLL Response:: " + dllReturnString);
         });
     });
 }
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(createWindow);
+app.whenReady().then(function () {
+    createWindow();
+});
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
     // On macOS it is common for applications and their menu bar

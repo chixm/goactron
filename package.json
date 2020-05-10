@@ -7,7 +7,8 @@
     "transpile": "tsc",
     "start": "electron .",
     "htmlcopy": "copy \"index.html\" \"dist/index.html\"",
-    "build": "npm run transpile && npm run htmlcopy"
+    "build": "npm run mkdll && npm run transpile && npm run htmlcopy",
+    "mkdll": "go build -buildmode=c-shared -o dist/goactron.dll ./..."
   },
   "repository": "https://github.com/chixm/goactron",
   "keywords": [
@@ -20,12 +21,14 @@
   "author": "GitHub",
   "license": "MIT",
   "devDependencies": {
+    "@types/ffi-napi": "^2.4.1",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
     "electron": "^8.2.5",
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "ffi-napi": "^2.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }
