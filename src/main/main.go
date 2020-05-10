@@ -5,6 +5,7 @@ import "os"
 
 /** Goのルールでmainは必須 */
 func main() {
+	Setup()
 }
 
 //export RunCommand
