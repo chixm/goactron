@@ -1,7 +1,10 @@
 package main
 
-import "C"
-import "os"
+import (
+	"C"
+	"log"
+	"os"
+)
 
 /** Goのルールでmainは必須 */
 func main() {
@@ -16,13 +19,20 @@ func RunCommand(str *C.char) *C.char {
 }
 
 //export InfoLog
-func InfoLog(str *C.char) int64 {
+func InfoLog(str *C.char) int {
+	defer func() { // something wrong with log
+		if err := recover(); err != nil {
+			log.Panicln(`Error log Write Error.`)
+		}
+	}()
 	text := C.GoString(str)
+	log.Println(text)
 	writeLog(text)
 	return 0
 }
 
 func RunTest() string {
-	writeLog(`test logging`)
+	cs := C.CString("pointer")
+	writeLog(C.GoString(cs))
 	return C.GoString(RunCommand(C.CString(`test`)))
 }

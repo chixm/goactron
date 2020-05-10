@@ -10,7 +10,7 @@ function defineDllFunctions(): GoactronDll {
     let dllPath = path.resolve(__dirname,"goactron.dll");
     return ffi.Library(dllPath,{
         'RunCommand': ['string', ['string']],
-        'InfoLog': ['string',['int']]
+        'InfoLog': ['int', ['string']]
     });
 }
 
