@@ -20,9 +20,9 @@ function createWindow() {
     mainWindow.webContents.openDevTools();
     electron_1.ipcMain.handle('command-exec', function (_event, command) {
         console.log(command + " received!");
-        var dllReturnString = dllLoader_1.dllMakeDirectory(command);
+        dllLoader_1.writeLog(command);
         return new Promise(function (resolve) {
-            resolve("DLL Response:: " + dllReturnString);
+            resolve(command + " has written to log");
         });
     });
 }

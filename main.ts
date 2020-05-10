@@ -1,5 +1,5 @@
 import { ipcMain } from "electron"
-import { dllMakeDirectory } from "./dllLoader"
+import { dllMakeDirectory, writeLog } from "./dllLoader"
 
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
@@ -23,9 +23,9 @@ function createWindow () {
 
   ipcMain.handle('command-exec', (_event, command) => {
     console.log(`${command} received!`);
-    const dllReturnString = dllMakeDirectory(command);
+    writeLog(command);
     return new Promise<string>(resolve=>{
-      resolve(`DLL Response:: ${dllReturnString}`);
+      resolve(`${command} has written to log`);
     });
   });
 }

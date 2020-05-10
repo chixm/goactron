@@ -71,6 +71,8 @@ extern "C" {
 
 extern char* RunCommand(char* p0);
 
+extern GoInt64 InfoLog(char* p0);
+
 #ifdef __cplusplus
 }
 #endif

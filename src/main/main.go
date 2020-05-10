@@ -15,6 +15,14 @@ func RunCommand(str *C.char) *C.char {
 	return C.CString(cs + `Directory Created`)
 }
 
+//export InfoLog
+func InfoLog(str *C.char) int64 {
+	text := C.GoString(str)
+	writeLog(text)
+	return 0
+}
+
 func RunTest() string {
+	writeLog(`test logging`)
 	return C.GoString(RunCommand(C.CString(`test`)))
 }

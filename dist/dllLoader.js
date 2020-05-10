@@ -12,7 +12,8 @@ var path = __importStar(require("path"));
 function defineDllFunctions() {
     var dllPath = path.resolve(__dirname, "goactron.dll");
     return ffi.Library(dllPath, {
-        'RunCommand': ['string', ['string']]
+        'RunCommand': ['string', ['string']],
+        'InfoLog': ['string', ['int']]
     });
 }
 var dll = defineDllFunctions();
@@ -21,3 +22,7 @@ function dllMakeDirectory(name) {
     return dll.RunCommand(name);
 }
 exports.dllMakeDirectory = dllMakeDirectory;
+function writeLog(text) {
+    return dll.InfoLog(text);
+}
+exports.writeLog = writeLog;
