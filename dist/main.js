@@ -15,7 +15,7 @@ function createWindow() {
         }
     });
     // and load the index.html of the app.
-    mainWindow.loadFile('index.html');
+    mainWindow.loadFile('view/index.html');
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
     electron_1.ipcMain.handle('command-exec', function (_event, command) {
