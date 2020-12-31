@@ -7,9 +7,10 @@
     "transpile": "tsc",
     "start": "electron .",
     "htmlcopy": "cpx -C \"view/*.{html, png, jpg}\" dist/view",
-    "prebuild": "npm run htmlcopy",
-    "build": "npm run mkdll && npm run transpile && npm run htmlcopy",
-    "mkdll": "go build -buildmode=c-shared -o dist/goactron.dll ./..."
+    "prebuild": "npm run htmlcopy && npm run mkbundle",
+    "build": "npm run mkdll && npm run transpile",
+    "mkdll": "go build -buildmode=c-shared -o dist/goactron.dll ./...",
+    "mkbundle": "webpack"
   },
   "repository": "https://github.com/chixm/goactron",
   "keywords": [
@@ -22,12 +23,17 @@
   "author": "GitHub",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.12.10",
     "@types/ffi-napi": "^2.4.1",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.7",
+    "babel-loader": "^8.2.2",
     "cpx": "^1.5.0",
     "electron": "^11.1.1",
-    "typescript": "^3.8.3"
+    "ts-loader": "^8.0.12",
+    "typescript": "^3.8.3",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.0"
   },
   "dependencies": {
     "ffi-napi": "^2.5.0",
