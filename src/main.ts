@@ -1,11 +1,10 @@
 import { ipcMain } from "electron"
-import { dllMakeDirectory, writeLog } from "./dllLoader"
 
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow } = require('electron')
 const path = require('path')
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
@@ -23,8 +22,7 @@ function createWindow () {
 
   ipcMain.handle('command-exec', (_event, command) => {
     console.log(`${command} received!`);
-    writeLog(command);
-    return new Promise<string>(resolve=>{
+    return new Promise<string>(resolve => {
       resolve(`${command} has written to log`);
     });
   });
@@ -33,7 +31,7 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(()=>{
+app.whenReady().then(() => {
   createWindow();
 });
 

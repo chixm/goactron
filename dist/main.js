@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var electron_1 = require("electron");
-var dllLoader_1 = require("./dllLoader");
 // Modules to control application life and create native browser window
 var _a = require('electron'), app = _a.app, BrowserWindow = _a.BrowserWindow;
 var path = require('path');
@@ -19,10 +18,9 @@ function createWindow() {
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
     electron_1.ipcMain.handle('command-exec', function (_event, command) {
-        console.log(command + " received!");
-        dllLoader_1.writeLog(command);
+        console.log("".concat(command, " received!"));
         return new Promise(function (resolve) {
-            resolve(command + " has written to log");
+            resolve("".concat(command, " has written to log"));
         });
     });
 }

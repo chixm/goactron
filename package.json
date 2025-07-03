@@ -7,10 +7,10 @@
     "transpile": "tsc",
     "start": "electron .",
     "htmlcopy": "cpx -C \"view/*.{html, png, jpg}\" dist/view",
-    "prebuild": "npm run htmlcopy && npm run mkbundle",
-    "build": "npm run mkdll && npm run transpile",
-    "mkdll": "go build -buildmode=c-shared -o dist/goactron.dll ./...",
-    "mkbundle": "webpack"
+    "prebuild": "npm run htmlcopy && npm run bundle",
+    "build": "npm run transpile",
+    "dev_bundled": "vite",
+    "bundle": "vite build"
   },
   "repository": "https://github.com/chixm/goactron",
   "keywords": [
@@ -32,8 +32,9 @@
     "cpx": "^1.5.0",
     "electron": "^11.1.1",
     "ts-loader": "^8.0.12",
-    "typescript": "^3.8.3",
-    "vite": "^7.0.1"
+    "typescript": "^5.8.3",
+    "vite": "^7.0.1",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
     "ffi-napi": "^2.5.0",
